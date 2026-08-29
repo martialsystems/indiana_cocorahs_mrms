@@ -6,6 +6,8 @@ MRMS RadarOnly is close; a tree does not beat it on amount. Held-out RMSE is 0.1
 
 Science lock `ac36f0f`. 685 eligible Indiana stations, 409 train-block, 177 held-out. Train n=30717 through 2024-09-30. Holdout n=19189 from 2024-10-01. RadarOnly 24H at 12Z. GaugeCorr stays out. This tree does not read `p_sfha`. Rain-stage stays frozen.
 
+Write-up: https://gist.github.com/martialsystems/b5f900aad37487bb8c0206a321c1ed5c
+
 Sibling rain-to-stage (Stage IV, Nora; different question): https://github.com/martialsystems/white_river_rain_stage
 
 ![Figure 1. Holdout scatter](logs/in_live/scatter.png)
