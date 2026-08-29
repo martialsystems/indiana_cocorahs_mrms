@@ -1,0 +1,11 @@
+{
+  "engine": "graphforge",
+  "github": "martialsystems/graphforge",
+  "track": "main",
+  "remote": "origin",
+  "min_version": "0.6.0",
+  "policy": "report_only",
+  "local_candidates": ["~/graphforge"],
+  "require_product_laws": true,
+  "note": "QpeForge: no p_sfha, spatial station-block holdout, RadarOnly fetch-or-stop, bias map is not water. Verify-before-done is the finish gate."
+}

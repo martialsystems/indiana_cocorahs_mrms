@@ -1,0 +1,165 @@
+{
+  "stage": "0",
+  "fixture": true,
+  "question": "Does RadarOnly MRMS match CoCoRaHS daily rain at held-out Indiana stations?",
+  "product": "RadarOnly_QPE_24H",
+  "source": "fixture",
+  "n_obs": 11280,
+  "n_stations": 48,
+  "n_train": 3312,
+  "n_holdout": 1716,
+  "n_train_stations": 36,
+  "n_holdout_stations": 12,
+  "units": "inches",
+  "skill": {
+    "identity": {
+      "rmse_in": 0.08883996125554776,
+      "mae_in": 0.04021234512366839,
+      "bias_in": 0.02677446309045824,
+      "csi_010": 0.6866359447004609,
+      "n": 1716,
+      "name": "RadarOnly"
+    },
+    "idw": {
+      "rmse_in": 0.2000509795920441,
+      "mae_in": 0.10256308686989406,
+      "bias_in": 0.01157966993776057,
+      "csi_010": 0.14201183431952663,
+      "n": 1716,
+      "name": "IDW"
+    },
+    "ridge": {
+      "rmse_in": 0.04086728916201571,
+      "mae_in": 0.025473708682494864,
+      "bias_in": 0.0009147207581563945,
+      "csi_010": 0.7528089887640449,
+      "n": 1716,
+      "name": "Ridge"
+    },
+    "hgb": {
+      "rmse_in": 0.039277953775537645,
+      "mae_in": 0.021051834512736758,
+      "bias_in": -0.0006762961906934026,
+      "csi_010": 0.7535816618911175,
+      "n": 1716,
+      "name": "HGB"
+    }
+  },
+  "august_2026_in_train": false,
+  "random_split": false,
+  "station_leak": false,
+  "gauge_as_feature": false,
+  "p_sfha_feature": false,
+  "p_sfha_label": false,
+  "figures": [
+    "scatter.png",
+    "bias_map.png"
+  ],
+  "station_bias": [
+    {
+      "station_id": "IN-FX-01",
+      "lat": 38.02,
+      "lon": -87.85,
+      "n": 143,
+      "bias_in": 0.0034327733375692595,
+      "hgb_bias_in": -0.0006001930427949935
+    },
+    {
+      "station_id": "IN-FX-06",
+      "lat": 38.02,
+      "lon": -85.83571428571429,
+      "n": 143,
+      "bias_in": 0.03746898766717735,
+      "hgb_bias_in": 0.005706515396857793
+    },
+    {
+      "station_id": "IN-FX-10",
+      "lat": 38.718,
+      "lon": -87.44714285714285,
+      "n": 143,
+      "bias_in": 0.007822608299110212,
+      "hgb_bias_in": -0.000774885189935315
+    },
+    {
+      "station_id": "IN-FX-15",
+      "lat": 38.718,
+      "lon": -85.43285714285715,
+      "n": 143,
+      "bias_in": 0.05900175843503317,
+      "hgb_bias_in": 0.0019924399028755364
+    },
+    {
+      "station_id": "IN-FX-19",
+      "lat": 39.416000000000004,
+      "lon": -87.0442857142857,
+      "n": 143,
+      "bias_in": 0.019569524978020073,
+      "hgb_bias_in": 0.004902649440234365
+    },
+    {
+      "station_id": "IN-FX-20",
+      "lat": 39.416000000000004,
+      "lon": -86.64142857142856,
+      "n": 143,
+      "bias_in": 0.02014965609357371,
+      "hgb_bias_in": -0.00031069466776753325
+    },
+    {
+      "station_id": "IN-FX-24",
+      "lat": 39.416000000000004,
+      "lon": -85.03,
+      "n": 143,
+      "bias_in": 0.06034477978161359,
+      "hgb_bias_in": 0.0029120746749537545
+    },
+    {
+      "station_id": "IN-FX-29",
+      "lat": 40.114,
+      "lon": -86.23857142857143,
+      "n": 143,
+      "bias_in": 0.03642359558317572,
+      "hgb_bias_in": -0.006785886885019573
+    },
+    {
+      "station_id": "IN-FX-33",
+      "lat": 40.812,
+      "lon": -87.85,
+      "n": 143,
+      "bias_in": 0.0009659438585536402,
+      "hgb_bias_in": -0.0021025973201001134
+    },
+    {
+      "station_id": "IN-FX-38",
+      "lat": 40.812,
+      "lon": -85.83571428571429,
+      "n": 143,
+      "bias_in": 0.030987125718891,
+      "hgb_bias_in": -0.00310456022935599
+    },
+    {
+      "station_id": "IN-FX-42",
+      "lat": 41.51,
+      "lon": -87.44714285714285,
+      "n": 143,
+      "bias_in": 0.005794697043379397,
+      "hgb_bias_in": -0.0034128488716656225
+    },
+    {
+      "station_id": "IN-FX-47",
+      "lat": 41.51,
+      "lon": -85.43285714285715,
+      "n": 143,
+      "bias_in": 0.03933210628940171,
+      "hgb_bias_in": -0.006537567496603138
+    }
+  ],
+  "feature_names": [
+    "mrms_in",
+    "mrms_nbhd_in",
+    "lat",
+    "lon",
+    "sin_doy",
+    "cos_doy",
+    "range_km"
+  ]
+}

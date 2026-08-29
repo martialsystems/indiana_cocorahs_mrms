@@ -1,0 +1,22 @@
+{
+  "runtime_checks": [
+    {
+      "id": "unit-tests",
+      "argv": [".venv/bin/python", "-m", "pytest", "tests/", "-q"],
+      "timeout_s": 180,
+      "paths": ["src/**", "tests/**", "scripts/**", "qpeforge/**", "requirements.txt", "vbd.runtime.json"]
+    },
+    {
+      "id": "fixture-path",
+      "argv": [".venv/bin/python", "scripts/run_fixture.py", "logs/stage0_fixture"],
+      "timeout_s": 120,
+      "paths": ["src/**", "scripts/**", "tests/**"]
+    },
+    {
+      "id": "qpeforge-sanity",
+      "argv": [".venv/bin/python", "qpeforge/scripts/sanity_qpeforge.py"],
+      "timeout_s": 60,
+      "paths": ["qpeforge/**", "tests/test_qpeforge_laws.py"]
+    }
+  ]
+}
