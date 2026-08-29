@@ -30,6 +30,8 @@ def test_readme_opens_with_the_question() -> None:
     assert "volunteer QC" in text
     assert "ac36f0f" in text
     assert "gist.github.com/martialsystems/b5f900aad37487bb8c0206a321c1ed5c" in text
+    assert "66b896b0a4a0b8cba2b478aef64312f3" in text
+    assert ".github/blob/main/RESEARCH.md" not in text
     assert "16584e78d079666f7e8994b4cc6158be" not in text
     assert "Do not chase 0.009" in text
     live = json.loads((REPO / "logs" / "in_live" / "stage_c_report.json").read_text(encoding="utf-8"))

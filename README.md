@@ -66,4 +66,4 @@ Do not use stock `/usr/bin/python3 -m pytest`: it has no rasterio. HTTP 404 or a
 | `src/inrain/` | CoCoRaHS, RadarOnly clip, spatial split, identity/IDW/Ridge/HGB, figures, claims |
 | `qpeforge/` | GraphForge pin: no `p_sfha`, spatial holdout, RadarOnly fetch-or-stop, claim bans |
 
-Research index: https://github.com/martialsystems/.github/blob/main/RESEARCH.md
+Research index: https://gist.github.com/martialsystems/66b896b0a4a0b8cba2b478aef64312f3
