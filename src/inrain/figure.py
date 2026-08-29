@@ -10,6 +10,7 @@ import numpy as np
 
 from inrain.claims import require_clean
 from inrain.config import (
+    BIAS_MAP_PAD_DEG,
     FIXTURE_BIAS_SUBTITLE,
     INDIANA_RING,
     LIVE_BIAS_SUBTITLE,
@@ -84,21 +85,46 @@ def write_bias_map(dest: Path, *, fit: dict[str, Any], title: str, subtitle: str
     b = np.array([r["bias_in"] for r in rows], dtype=float)
     ring = np.asarray(INDIANA_RING, dtype=float)
     vmax = max(0.15, float(np.nanpercentile(np.abs(b), 95)))
-    fig, ax = plt.subplots(figsize=(6.4, 6.6))
+    fig, ax = plt.subplots(figsize=(6.8, 7.6))
     ax.plot(ring[:, 0], ring[:, 1], color="#64748b", lw=1.1)
-    sc = ax.scatter(lon, lat, c=b, cmap="RdBu_r", vmin=-vmax, vmax=vmax, s=28, edgecolors="#0f172a", linewidths=0.3)
+    sc = ax.scatter(
+        lon,
+        lat,
+        c=b,
+        cmap="RdBu_r",
+        vmin=-vmax,
+        vmax=vmax,
+        s=28,
+        edgecolors="#0f172a",
+        linewidths=0.3,
+        zorder=3,
+        clip_on=True,
+    )
+    pad = BIAS_MAP_PAD_DEG
+    ax.set_xlim(float(ring[:, 0].min()) - pad, float(ring[:, 0].max()) + pad)
+    ax.set_ylim(float(ring[:, 1].min()) - pad, float(ring[:, 1].max()) + pad)
+    ax.set_aspect("equal", adjustable="box")
     cb = fig.colorbar(sc, ax=ax, fraction=0.046, pad=0.04)
     cb.set_label("mean RadarOnly minus CoCoRaHS (in)", fontsize=8)
     ax.set_xlabel("lon")
     ax.set_ylabel("lat")
     ax.set_title(title, fontsize=10)
-    ax.set_aspect("equal", adjustable="box")
-    fig.text(0.5, 0.02, subtitle, ha="center", fontsize=8)
-    fig.subplots_adjust(bottom=0.12, top=0.90)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(dest, dpi=130)
+    _caption(fig, subtitle)
+    fig.savefig(dest, dpi=130, bbox_inches="tight", pad_inches=0.18)
     plt.close(fig)
     return dest
+
+
+def _caption(fig, subtitle: str) -> None:
+    lines = [ln.strip() for ln in subtitle.split(". ") if ln.strip()]
+    if len(lines) >= 2:
+        fig.text(0.5, 0.055, lines[0].rstrip(".") + ".", ha="center", fontsize=8)
+        fig.text(0.5, 0.022, ". ".join(lines[1:]), ha="center", fontsize=7.5)
+        fig.subplots_adjust(bottom=0.12, top=0.93, left=0.12, right=0.88)
+    else:
+        fig.text(0.5, 0.03, subtitle, ha="center", fontsize=8)
+        fig.subplots_adjust(bottom=0.10, top=0.93, left=0.12, right=0.88)
 
 
 def scatter_subtitle(fit: dict[str, Any], *, live: bool) -> str:

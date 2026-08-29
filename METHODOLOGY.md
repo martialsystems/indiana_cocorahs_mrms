@@ -42,7 +42,7 @@ Live holdout at `ac36f0f`: 177 stations, 19189 rows. RadarOnly RMSE 0.133, MAE 0
 ## Figures
 
 1. Holdout scatter: CoCoRaHS vs RadarOnly and vs HGB. Caption: RadarOnly vs HGB RMSE, plus 12Z 24h vs 7am local and volunteer QC.
-2. Bias map: mean (RadarOnly minus CoCoRaHS) at held-out stations only. Residual, not water. Same 12Z / QC caption.
+2. Bias map: mean (RadarOnly minus CoCoRaHS) at held-out stations only. Residual, not water. Indiana outline is a 46-vertex sketch (Lake Michigan bite, Ohio River). Same 12Z / QC caption. Pad the axes so the state is not clipped.
 
 ## Claims
 
