@@ -37,12 +37,12 @@ Features: RadarOnly cell, 3x3 mean, lat, lon, day-of-year sine and cosine, range
 
 Metrics on held-out stations, inches: RMSE, MAE, mean bias (predictor minus gauge), wet-day CSI at 0.10 in. Yesterday's gauge is the wrong bar (this is not a stage nowcast).
 
-Live holdout: 177 stations, 19189 rows. RadarOnly RMSE 0.133, MAE 0.048, bias +0.013, CSI 0.82. Ridge 0.124 / 0.049 / +0.001 / 0.83. HGB 0.141 / 0.048 / -0.004 / 0.84. IDW 0.209 / 0.076 / +0.001 / 0.72. Ridge trims bias. HGB does not beat RadarOnly RMSE. Fixture HGB 0.039 vs 0.089 does not replace this table.
+Live holdout at `ac36f0f`: 177 stations, 19189 rows. RadarOnly RMSE 0.133, MAE 0.048, bias +0.013, CSI 0.82. HGB 0.141 / 0.048 / -0.004 / 0.84. IDW 0.209 / 0.076 / +0.001 / 0.72. Ridge 0.124 / 0.049 / +0.001 / 0.83. RadarOnly is the field. A tree does not beat it on amount. Ridge's 0.009 in RMSE with MAE 0.001 in worse is noise, not a method. Fixture HGB 0.039 vs 0.089 does not replace this table.
 
 ## Figures
 
-1. Holdout scatter: CoCoRaHS vs RadarOnly and vs HGB. Caption is the RMSE ranking.
-2. Bias map: mean (RadarOnly minus CoCoRaHS) at held-out stations only. Residual, not water.
+1. Holdout scatter: CoCoRaHS vs RadarOnly and vs HGB. Caption: RadarOnly vs HGB RMSE, plus 12Z 24h vs 7am local and volunteer QC.
+2. Bias map: mean (RadarOnly minus CoCoRaHS) at held-out stations only. Residual, not water. Same 12Z / QC caption.
 
 ## Claims
 
@@ -52,4 +52,4 @@ Banned: 100-year exceedance; p_sfha in the feature matrix or as a forecast; bias
 
 ## Next tree, if any
 
-Hourly 7am local-tz sums, Central vs Eastern county clocks, or GaugeCorr as an operational (leaky) product. Not from this snapshot.
+When radar misses: hours, lake-effect, 7am split. New tree, or stop. Not from `ac36f0f`. Do not chase 0.009 in RMSE. GaugeCorr stays out.

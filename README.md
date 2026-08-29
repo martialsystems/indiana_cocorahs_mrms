@@ -2,23 +2,23 @@
 
 Does RadarOnly MRMS match CoCoRaHS daily rain at held-out Indiana stations?
 
-On this sample, RadarOnly is already close. Held-out RMSE is 0.133 in. Ridge is 0.124 and takes mean bias from +0.013 to +0.001. HGB is 0.141 RMSE. IDW of other CoCoRaHS is 0.209. MAE is 0.048 in for RadarOnly and for HGB; Ridge is 0.049. CSI at 0.10 in is 0.82 (radar), 0.83 (Ridge), 0.84 (HGB). Fixture HGB beating identity does not rescue live skill.
+MRMS RadarOnly is close; a tree does not beat it on amount. Held-out RMSE is 0.133 in (CSI 0.82). HGB is 0.141 at stations it never trained on. IDW of other CoCoRaHS is 0.209. Ridge is 0.124 RMSE then 0.049 MAE against radar's 0.048: that 0.009 in is noise, not a method. Fixture HGB beating identity does not rescue live skill.
 
-Live science is `logs/in_live/stage_c_report.json`. 685 eligible Indiana stations, 409 train-block, 177 held-out. Train n=30717 through 2024-09-30. Holdout n=19189 from 2024-10-01. RadarOnly 24H at 12Z. This tree does not read `p_sfha`.
+Science lock `ac36f0f`. 685 eligible Indiana stations, 409 train-block, 177 held-out. Train n=30717 through 2024-09-30. Holdout n=19189 from 2024-10-01. RadarOnly 24H at 12Z. GaugeCorr stays out. This tree does not read `p_sfha`. Rain-stage stays frozen.
 
-Sibling rain-to-stage (Stage IV, Nora): https://github.com/martialsystems/white_river_rain_stage
+Sibling rain-to-stage (Stage IV, Nora; different question): https://github.com/martialsystems/white_river_rain_stage
 
 ![Figure 1. Holdout scatter](logs/in_live/scatter.png)
 
-Figure 1. Live holdout: CoCoRaHS versus raw RadarOnly and versus HGB. Ranking is RMSE on 177 held-out stations.
+Figure 1. Live holdout at 177 stations: CoCoRaHS vs RadarOnly and vs HGB. RadarOnly RMSE 0.133 in; HGB 0.141. 12Z 24h vs 7am local; volunteer QC.
 
 ![Figure 2. Bias map](logs/in_live/bias_map.png)
 
-Figure 2. Mean RadarOnly minus CoCoRaHS at held-out stations. Residual, not water. Train stations omitted.
+Figure 2. Mean RadarOnly minus CoCoRaHS at held-out stations. Residual, not water. 12Z 24h vs 7am local; volunteer QC.
 
 ## Live skill (held-out stations)
 
-Locked from `logs/in_live/stage_c_report.json`. Inches. Summers 2024 train, 2025 and 2026 holdout. Identity is raw RadarOnly. IDW uses same-day train-block CoCoRaHS. HGB is the ML.
+Locked from `logs/in_live/stage_c_report.json` at `ac36f0f`. Inches. Summers 2024 train, 2025 and 2026 holdout. Identity is raw RadarOnly. IDW uses same-day train-block CoCoRaHS. HGB is the ML.
 
 | Model | RMSE (in) | MAE (in) | Bias (in) | CSI 0.10 in |
 |-------|----------:|---------:|----------:|------------:|
@@ -27,11 +27,11 @@ Locked from `logs/in_live/stage_c_report.json`. Inches. Summers 2024 train, 2025
 | Ridge | 0.124 | 0.049 | +0.001 | 0.83 |
 | HGB | 0.141 | 0.048 | -0.004 | 0.84 |
 
-Ridge trims the wet bias. HGB does not beat RadarOnly RMSE at stations it never trained on. IDW of neighboring gauges is worse than radar.
+Do not chase 0.009 in of RMSE.
 
 ## Why RadarOnly
 
-CoCoRaHS daily reports are the labels. MRMS GaugeCorr and MultiSensor Pass2 ingest gauges. Scoring those products at CoCoRaHS sites is leakage. RadarOnly is independent of the labels. The ML may use RadarOnly, location, season, and range to nearest WSR-88D. It may not use the gauge as a feature.
+CoCoRaHS daily reports are the labels. MRMS GaugeCorr and MultiSensor Pass2 ingest gauges. Scoring those products at CoCoRaHS sites is leakage. RadarOnly is independent of the labels.
 
 ## Split
 
@@ -39,7 +39,7 @@ CoCoRaHS daily reports are the labels. MRMS GaugeCorr and MultiSensor Pass2 inge
 
 ## Day match
 
-CoCoRaHS date D versus RadarOnly 24H ending 12Z on D (7am EST). EDT is a 1-hour mismatch. Central-time Indiana counties are a further mismatch. Volunteer QC is the remaining residual risk.
+CoCoRaHS date D versus RadarOnly 24H ending 12Z on D (7am EST). EDT is a 1-hour mismatch. Central-time Indiana counties are a further mismatch. Volunteer QC stays in the caption.
 
 ## Stage 0
 

@@ -2,7 +2,7 @@
 
 Public GitHub. MIT. Question: Does RadarOnly MRMS match CoCoRaHS daily rain at held-out Indiana stations?
 
-Live answer: RadarOnly RMSE 0.133 in on 177 held-out stations. Ridge 0.124 (MAE 0.049 vs 0.048). HGB 0.141. IDW 0.209. Fixture HGB does not rescue live. Do not re-fit to chase that table.
+Live answer at `ac36f0f`: MRMS RadarOnly is close; a tree does not beat it on amount. RMSE 0.133 in, CSI 0.82. HGB 0.141. IDW 0.209. Ridge 0.124 then MAE 0.049 vs 0.048 is noise, not a method. Do not chase 0.009 in RMSE. Do not re-fit. Fixture HGB does not rescue live.
 
 This is a new tree. Do not restamp https://github.com/martialsystems/white_river_rain_stage. That repo forbids hourly MRMS as v1 and forbids starting the next rain tree from its snapshot.
 
@@ -12,7 +12,7 @@ This tree does not read `p_sfha`. Do not edit indiana_flood_completion, Nora HAN
 
 `qpeforge/` is the GraphForge pin: no `p_sfha`, spatial holdout, RadarOnly fetch-or-stop, claim bans.
 
-Do not start hourly 7am local-tz sums, Central-county clocks, or GaugeCorr as v1.
+Next, if any: when radar misses (hours, lake-effect, 7am split), as a new tree, or stop. Not from `ac36f0f`. Not GaugeCorr.
 
 ## Verify
 

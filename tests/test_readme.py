@@ -25,6 +25,11 @@ def test_readme_opens_with_the_question() -> None:
     assert "What it is not" not in text
     assert "scatter.png" in text
     assert "bias_map.png" in text
+    assert "a tree does not beat it on amount" in text
+    assert "12Z 24h vs 7am local" in text
+    assert "volunteer QC" in text
+    assert "ac36f0f" in text
+    assert "Do not chase 0.009" in text
     live = json.loads((REPO / "logs" / "in_live" / "stage_c_report.json").read_text(encoding="utf-8"))
     ident = live["skill"]["identity"]["rmse_in"]
     hgb = live["skill"]["hgb"]["rmse_in"]

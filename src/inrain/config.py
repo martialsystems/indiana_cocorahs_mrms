@@ -74,8 +74,9 @@ FEATURE_NAMES = (
     "cos_doy",
     "range_km",
 )
+LOCKED_LIVE_COMMIT = "ac36f0f7892a90ab38626406e5797387427a4b32"
 LIVE_BIAS_SUBTITLE = (
-    "Residual at held-out stations, not water. Train stations omitted."
+    "Residual at held-out stations, not water. 12Z 24h vs 7am local; volunteer QC."
 )
 FIXTURE_BIAS_SUBTITLE = (
     "Fixture planted east bias. Does not rescue live skill."

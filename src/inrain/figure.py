@@ -101,21 +101,63 @@ def write_bias_map(dest: Path, *, fit: dict[str, Any], title: str, subtitle: str
     return dest
 
 
+def scatter_subtitle(fit: dict[str, Any], *, live: bool) -> str:
+    ident = float(fit["skill"]["identity"]["rmse_in"])
+    hgb = float(fit["skill"]["hgb"]["rmse_in"])
+    core = f"RadarOnly {ident:.3f} in RMSE; HGB {hgb:.3f}"
+    if live:
+        return f"{core}. 12Z 24h vs 7am local; volunteer QC."
+    return f"{core}. Fixture; does not rescue live skill."
+
+
+def restamp_footer(
+    path: Path,
+    *,
+    subtitle: str,
+    figsize: tuple[float, float],
+    crop_top: float = 0.88,
+) -> Path:
+    """Replace the footer on an existing PNG. Does not re-fit."""
+    require_clean(subtitle, source="footer")
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    img = np.asarray(plt.imread(path), dtype=float)
+    if img.max() > 1.0:
+        img = img / 255.0
+    r1 = max(1, int(img.shape[0] * crop_top))
+    crop = img[:r1]
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.imshow(crop)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_title("")
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    lines = [ln.strip() for ln in subtitle.split(". ") if ln.strip()]
+    if len(lines) >= 2:
+        fig.text(0.5, 0.045, lines[0].rstrip(".") + ".", ha="center", fontsize=8)
+        fig.text(0.5, 0.018, ". ".join(lines[1:]), ha="center", fontsize=7.5)
+        fig.subplots_adjust(bottom=0.12, top=0.99, left=0.01, right=0.99)
+    else:
+        fig.text(0.5, 0.03, subtitle, ha="center", fontsize=8)
+        fig.subplots_adjust(bottom=0.10, top=0.99, left=0.01, right=0.99)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+    return path
+
+
 def write_two(log_dir: Path, *, fit: dict[str, Any], live: bool = False) -> list[Path]:
     sub = LIVE_BIAS_SUBTITLE if live else FIXTURE_BIAS_SUBTITLE
-    ranking = (
-        f"Ridge {fit['skill']['ridge']['rmse_in']:.3f} in RMSE, "
-        f"RadarOnly {fit['skill']['identity']['rmse_in']:.3f}, "
-        f"HGB {fit['skill']['hgb']['rmse_in']:.3f}, "
-        f"held-out stations"
-    )
     require_clean(QUESTION, source="question")
     paths = [
         write_scatter(
             log_dir / "scatter.png",
             fit=fit,
             title="Held-out CoCoRaHS vs RadarOnly and HGB",
-            subtitle=ranking,
+            subtitle=scatter_subtitle(fit, live=live),
         ),
         write_bias_map(
             log_dir / "bias_map.png",
