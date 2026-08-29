@@ -65,3 +65,5 @@ Do not use stock `/usr/bin/python3 -m pytest`: it has no rasterio. HTTP 404 or a
 | [CHECKLIST.md](CHECKLIST.md) | Operator list |
 | `src/inrain/` | CoCoRaHS, RadarOnly clip, spatial split, identity/IDW/Ridge/HGB, figures, claims |
 | `qpeforge/` | GraphForge pin: no `p_sfha`, spatial holdout, RadarOnly fetch-or-stop, claim bans |
+
+Lanes (maps / White River Q / precip): https://github.com/martialsystems
